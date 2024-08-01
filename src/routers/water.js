@@ -1,4 +1,14 @@
 import { Router } from 'express';
+import { validateBody } from '../middlewares/validateBody.js';
+import {
+  getWaterController,
+  addWaterController,
+  getWaterByIdController,
+  deleteWaterController,
+  patchWaterController,
+} from '../controllers/water.js';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { createWaterSchema, updateWaterSchema } from '../validation/water.js';
 
 const router = Router();
 
@@ -6,14 +16,22 @@ const router = Router();
 
 // router.get('/', ctrlWrapper(getWaterController));
 
-router.get('/');
+router.get('/', ctrlWrapper(getWaterController));
 
-router.get('/:waterId');
+router.get('/:waterId', ctrlWrapper(getWaterByIdController));
 
-router.post('/');
+router.post(
+  '/',
+  validateBody(createWaterSchema),
+  ctrlWrapper(addWaterController),
+);
 
-router.patch('/:waterId');
+router.patch(
+  '/:waterId',
+  validateBody(updateWaterSchema),
+  ctrlWrapper(patchWaterController),
+);
 
-router.delete('/:waterId');
+router.delete('/:waterId', ctrlWrapper(deleteWaterController));
 
 export default router;
