@@ -8,8 +8,6 @@ const router = Router();
 
 router.get('/');
 
-router.get('/');
-
 router.get('/:waterId');
 
 router.post('/');
