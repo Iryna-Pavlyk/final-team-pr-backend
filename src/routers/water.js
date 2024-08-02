@@ -5,7 +5,7 @@ import {
   deleteWaterController,
   patchWaterController,
 } from '../controllers/water.js';
-import ctrlWrapper from '../utils/ctrlWrapper.js';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { createWaterSchema, updateWaterSchema } from '../validation/water.js';
 import authenticate from '../middlewares/authenticate.js';
 
