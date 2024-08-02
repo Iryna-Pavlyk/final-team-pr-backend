@@ -1,11 +1,11 @@
 import { Schema, model } from 'mongoose';
 import { mongooseSaveError, setUpdateSettings } from './hooks.js';
-import { emailRegexp } from '../../constants/user-constants.js';
+import { emailRegexp, userGender } from '../../constants/user-constants.js';
 
 const userSchema = new Schema({
     name: {
         type: String,
-        default: 'User',
+        default: '',
     },
     email: {
         type: String,
@@ -15,7 +15,27 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+    },
+    gender: {
+        type: String,
+        enum: userGender,
+        default: 'woman',
+    },
+    weight: {
+        type: Number,
+        default: 0,
+    },
+    timeOfSportActivities: {
+        type: Number,
+        default: 0,
+    },
+    waterToDrink: {
+        type: Number,
+        default: 1.5,
+    },
+    avatar: {
+        type: String,
     },
 }, {timestamps: true, versionKey: false});
 
