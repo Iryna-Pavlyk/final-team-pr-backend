@@ -2,24 +2,20 @@ import { model, Schema } from 'mongoose';
 
 const contactsSchema = new Schema(
   {
-    waterRate: {
+    waterAmount: {
       type: Number,
       required: true,
     },
-
-    time: {
+    date: {
       type: String,
       required: true,
     },
-
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
     },
-    photo: { type: String },
   },
-
   {
     timestamps: true,
     versionKey: false,

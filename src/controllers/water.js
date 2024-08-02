@@ -1,53 +1,21 @@
 import {
-  getAllWaters,
   addWater,
-  getWaterById,
   deleteWater,
   updateWater,
 } from '../services/water.js';
 import createHttpError from 'http-errors';
 
-export const getWaterController = async (req, res, next) => {
-  const waters = await getAllWaters();
-  res.status(200).json({
-    status: 200,
-    message: 'Successfully found waters!',
-    data: waters,
-  });
-};
+export const getDayWater = async (req, res) => {
 
-export const getWaterByIdController = async (req, res, next) => {
-  const { waterId } = req.params;
-  //   const userId = req.user._id;
-  const userId = '66ab83cf8c458bbb511fa6ac';
-
-  const water = await getWaterById({ waterId, userId });
-  if (!water) {
-    next(createHttpError(404, 'Water not found'));
-    return;
-  }
-
-  res.status(200).json({
-    status: 200,
-    message: `Successfully found contact with id ${waterId}!`,
-    data: water,
-  });
-};
+}
 
 export const addWaterController = async (req, res, next) => {
-  const { waterRate, time } = req.body;
-
-  if (!waterRate || !time) {
-    next(createHttpError(400, 'waterVolume and timeAdded are required'));
-    return;
-  }
-  //   const userId = req.user._id;
-  const userId = '66ab83cf8c458bbb511fa6ac';
-  delete req.body._V;
+  const { waterAmount, date } = req.body;
 
   const water = await addWater({
-    userId,
-    ...req.body,
+    userId: req.user._id,
+    waterAmount,
+    date,
   });
 
   res.status(201).json({
@@ -59,8 +27,7 @@ export const addWaterController = async (req, res, next) => {
 
 export const deleteWaterController = async (req, res, next) => {
   const { waterId } = req.params;
-  //   const userId = req.user._id;
-  const userId = '66ab83cf8c458bbb511fa6ac';
+  const userId = req.user._id;
 
   const water = await deleteWater({ waterId, userId });
 
@@ -74,8 +41,8 @@ export const deleteWaterController = async (req, res, next) => {
 
 export const patchWaterController = async (req, res, next) => {
   const { waterId } = req.params;
-  //   const userId = req.user._id;
-  const userId = '66ab83cf8c458bbb511fa6ac';
+  const userId = req.user._id;
+
   const result = await updateWater({
     waterId,
     userId,

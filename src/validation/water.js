@@ -1,14 +1,14 @@
 import Joi from 'joi';
+
+const isoDateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):([0-5]\d)$/;
+
 export const createWaterSchema = Joi.object({
-  waterRate: Joi.number().integer().min(50).max(2000).required(),
-  time: Joi.string()
-    .pattern(new RegExp('^(?:0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'))
-    .required(),
-  userId: Joi.string(), //.required(),
+  waterAmount: Joi.number().integer().min(10).max(2000).required(),
+  date: Joi.string()
+    .pattern(isoDateRegex)
+    .required()
 });
 export const updateWaterSchema = Joi.object({
-  waterRate: Joi.number().integer().min(50).max(2000),
-  time: Joi.string().pattern(
-    new RegExp('^(?:0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'),
-  ),
+  waterAmount: Joi.number().integer().min(10).max(2000),
+  date: Joi.string().pattern(isoDateRegex),
 });
