@@ -18,7 +18,12 @@ export const setupServer = () => {
     }),
   );
 
-  app.use(cors());
+  app.use(
+    cors({
+      origin: env('CORS_APPROVED_DOMAINS')?.split(', ') ?? [],
+      credentials: true,
+    }),
+  );
 
   app.use(express.json());
 
