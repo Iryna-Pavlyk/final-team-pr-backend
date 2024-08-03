@@ -1,0 +1,55 @@
+#/swagger/paths/students/post.yaml
+
+tags:
+  - Water
+summary: Create water
+operationId: createWater
+description: 'Create water with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - waterAmount
+          - date
+        properties:
+          waterAmount:
+            description: 'Water amount'
+            type: number
+            example: 250
+          date:
+            description: 'Date of added water'
+            type: string
+            example: 2024-08-03T18:26
+responses:
+  '201':
+    description: Creates water
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a water!
+            data:
+              type: object
+              $ref: ../../components/schemas/water.yaml
+  '400':
+    $ref: ..\..\components\responses\400.yaml
+  '401':
+    $ref: ..\..\components\responses\401.yaml
+  '404':
+    $ref: ..\..\components\responses\404.yaml
+  '500':
+    $ref: ..\..\components\responses\500.yaml

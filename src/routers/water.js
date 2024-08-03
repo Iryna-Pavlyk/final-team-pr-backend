@@ -13,7 +13,7 @@ const router = Router();
 
 router.use(authenticate);
 
-router.get('/day')
+router.get('/day');
 
 router.post(
   '/',
