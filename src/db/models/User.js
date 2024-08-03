@@ -32,7 +32,7 @@ const userSchema = new Schema({
     },
     waterToDrink: {
         type: Number,
-        default: 1.5,
+        default: 1500,
     },
     avatar: {
         type: String,
