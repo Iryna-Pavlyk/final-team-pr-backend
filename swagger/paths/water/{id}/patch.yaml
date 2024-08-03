@@ -1,0 +1,59 @@
+# swagger/paths/water/{id}/patch.yaml
+
+tags:
+  - Water
+summary: Update water by id
+operationId: patchWater
+description: 'Update water by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: waterId
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          waterAmount:
+            description: 'Water amount'
+            type: number
+            example: 250
+          date:
+            description: 'Date of added water'
+            type: string
+            example: 2024-08-03T18:26
+responses:
+  '200':
+    description: 'Update contact by id'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully patched a water!
+            data:
+              type: object
+              $ref: '../../../components/schemas/water.yaml'
+  '400':
+    $ref: ../../../components/responses/400.yaml
+  '401':
+    $ref: ../../../components/responses/401.yaml
+  '404':
+    $ref: ../../../components/responses/404.yaml
+  '500':
+    $ref: ../../../components/responses/500.yaml
