@@ -1,0 +1,69 @@
+#/swagger/paths/water/getForMonth.yaml
+
+tags:
+  - Water
+summary: Get list of waters for month
+operationId: getWatersForMonth
+description: 'Get list of waters with this endpoint'
+security:
+  - bearerAuth: []
+parameters:
+  - in: query
+    name: userId
+    schema:
+      type: string
+      example: 65e4decdd286b30065d54af9
+    description: The ID of the user to filter resources
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          date:
+            description: 'Date of added water'
+            type: string
+            example: 2024-08
+          waterRate:
+            description: 'Water rate'
+            type: number
+            example: 250
+responses:
+  '200':
+    description: Successfully found waters for month
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get waters for 2024-08
+            data:
+              type: object
+              required:
+                - dailyProgress
+                - waters
+              properties:
+                dailyProgress:
+                  type: number
+                  example: 100
+                waters:
+                  type: array
+                  items:
+                    $ref: '../../components/schemas/water.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'
