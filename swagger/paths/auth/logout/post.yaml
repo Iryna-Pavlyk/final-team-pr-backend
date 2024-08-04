@@ -22,7 +22,7 @@ requestBody:
           password:
             description: "User's password"
             type: string
-            example: 11111
+            example: 111111
 responses:
   '204':
     description: 'The user was logout successfully.'

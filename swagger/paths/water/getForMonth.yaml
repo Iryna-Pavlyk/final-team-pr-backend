@@ -14,20 +14,12 @@ parameters:
       type: string
       example: 65e4decdd286b30065d54af9
     description: The ID of the user to filter resources
-requestBody:
-  content:
-    application/json:
-      schema:
-        type: object
-        properties:
-          date:
-            description: 'Date of added water'
-            type: string
-            example: 2024-08
-          waterRate:
-            description: 'Water rate'
-            type: number
-            example: 250
+  - in: query
+    name: date
+    schema:
+      type: string
+      example: 2024-08
+    description: The date of the added water to filter resources
 responses:
   '200':
     description: Successfully found waters for month
