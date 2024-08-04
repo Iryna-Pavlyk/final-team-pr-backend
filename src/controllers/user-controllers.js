@@ -1,5 +1,14 @@
 import createHttpError from "http-errors";
-import { getUserSettings, patchUserSettings } from "../services/users-services.js";
+import { getUsers, getUserSettings, patchUserSettings } from "../services/users-services.js";
+
+export const getAllUsersController = async (req, res) => {
+        const contacts = await getUsers();
+        res.status(200).json({
+            status: res.statusCode,
+            message: "Successfully found users!",
+            data: contacts
+        });
+};
 
 export const getUserSettingsController = async (req, res) => {
     const { _id: userId } = req.user;

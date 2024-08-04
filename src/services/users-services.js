@@ -1,6 +1,8 @@
 import User from '../db/models/User.js';
 
-export const getUserSettings = async(filter) => {
+export const getUsers = () => User.find().countDocuments();
+
+export const getUserSettings = async (filter) => {
     const userInfo = await User.findById(filter);
     return userInfo;
 };
