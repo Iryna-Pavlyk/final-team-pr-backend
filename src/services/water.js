@@ -24,7 +24,7 @@ export const getMonthWater = async ({date, waterRate, userId}) => {
   const startDate = `${date}-01T00:00`;
   const [year, month] = date.split('-')
   const numberOfDays = new Date(year, month, 0).getDate()
-  const endDate = `${date}-${numberOfDays}T23:59`
+  const endDate = `${date}-${String(numberOfDays).padStart(2, '0')}T23:59`
 
   const query = [
     {
@@ -47,9 +47,19 @@ export const getMonthWater = async ({date, waterRate, userId}) => {
     }
   ]
 
-  const waters = await WaterCollection.aggregate(query)
+  const waters = await WaterCollection.aggregate(query);
 
-  return waters
+  const results = Array.from({ length: numberOfDays }, (_, i) => ({
+    date: `${date}-${String(i + 1).padStart(2, '0')}`,
+    progress: 0
+  }));
+
+  waters.forEach(water => {
+    const index = Number(water._id.slice(-2)) - 1
+    results[index].progress = calculateWaterProgress(waterRate, water.waters)
+  })
+
+  return results
 }
 
 export const addWater = async (payload) => {
