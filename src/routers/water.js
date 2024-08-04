@@ -10,14 +10,15 @@ import {
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { createWaterSchema, getDayWaterSchema, getMonthWaterSchema, updateWaterSchema } from '../validation/water.js';
 import authenticate from '../middlewares/authenticate.js';
+import validateQuery from '../utils/validateQuery.js';
 
 const router = Router();
 
 router.use(authenticate);
 
-router.get('/day', validateBody(getDayWaterSchema), ctrlWrapper(getDayWaterController))
+router.get('/day', validateQuery(getDayWaterSchema), ctrlWrapper(getDayWaterController))
 
-router.get('/month', validateBody(getMonthWaterSchema), ctrlWrapper(getMonthWaterController))
+router.get('/month', validateQuery(getMonthWaterSchema), ctrlWrapper(getMonthWaterController))
 
 router.post(
   '/',

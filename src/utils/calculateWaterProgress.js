@@ -3,8 +3,6 @@ export const calculateWaterProgress = (waterRate, waters) => {
     return sum + waterAmount;
   }, 0)
 
-  console.log(`Water rate: ${sumWater}`);
-
   if (sumWater > waterRate) return 100;
 
   const progress = Math.round((sumWater / waterRate) * 100);
