@@ -1,0 +1,32 @@
+#/swagger/paths/users/get.yaml
+
+tags:
+  - Users
+summary: Get number of users
+operationId: getUsers
+description: 'Get number of registered users'
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Successfully found users
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found users!
+            data:
+              type: number
+              example: 21
+  '404':
+    $ref: '../../components/responses/404.yaml'

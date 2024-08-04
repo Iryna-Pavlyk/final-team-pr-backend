@@ -8,16 +8,29 @@ import {
   patchWaterController,
 } from '../controllers/water.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import { createWaterSchema, getDayWaterSchema, getMonthWaterSchema, updateWaterSchema } from '../validation/water.js';
+import {
+  createWaterSchema,
+  getDayWaterSchema,
+  getMonthWaterSchema,
+  updateWaterSchema,
+} from '../validation/water.js';
 import authenticate from '../middlewares/authenticate.js';
 
 const router = Router();
 
 router.use(authenticate);
 
-router.get('/day', validateBody(getDayWaterSchema), ctrlWrapper(getDayWaterController))
+router.get(
+  '/day',
+  validateBody(getDayWaterSchema),
+  ctrlWrapper(getDayWaterController),
+);
 
-router.get('/month', validateBody(getMonthWaterSchema), ctrlWrapper(getMonthWaterController))
+router.get(
+  '/month',
+  validateBody(getMonthWaterSchema),
+  ctrlWrapper(getMonthWaterController),
+);
 
 router.post(
   '/',
