@@ -11,9 +11,7 @@ export const getMonthWaterSchema = Joi.object({
 
 export const createWaterSchema = Joi.object({
   waterAmount: Joi.number().integer().min(10).max(2000).required(),
-  date: Joi.string()
-    .pattern(isoDateFullRegex)
-    .required()
+  date: Joi.string().pattern(isoDateFullRegex).required(),
 });
 export const updateWaterSchema = Joi.object({
   waterAmount: Joi.number().integer().min(10).max(2000),
