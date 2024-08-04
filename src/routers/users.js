@@ -4,9 +4,11 @@ import validateBody from '../utils/validateBody.js';
 import { userInfoSchema } from '../validation/user-schemas.js';
 import isValidId from '../middlewares/isValidId.js';
 import authenticate from '../middlewares/authenticate.js';
-import { getUserSettingsController, patchUserSettingsController } from '../controllers/user-controllers.js';
+import { getAllUsersController, getUserSettingsController, patchUserSettingsController } from '../controllers/user-controllers.js';
 
 const usersRouter = Router();
+
+usersRouter.get('/', ctrlWrapper(getAllUsersController));
 
 usersRouter.use(authenticate);
 
