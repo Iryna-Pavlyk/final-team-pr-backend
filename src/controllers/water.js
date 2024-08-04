@@ -1,7 +1,7 @@
 import {
   addWater,
   deleteWater,
-  getDayWater,
+  getDayWater, getMonthWater,
   updateWater,
 } from '../services/water.js';
 import createHttpError from 'http-errors';
@@ -14,11 +14,26 @@ export const getDayWaterController = async (req, res, next) => {
   res.status(200).json({
     status: 200,
     message: `Successfully get waters for ${date}`,
-    data: { dailyProgress, waters }
+    data: {
+      dailyProgress,
+      waters
+    }
   })
 }
 
-export const getMonthWaterController = async (req, res, next) => {}
+export const getMonthWaterController = async (req, res, next) => {
+  const { date, waterRate } = req.body;
+
+  const days = await getMonthWater({date, waterRate, userId: req.user._id})
+
+  res.status(200).json({
+    status: 200,
+    message: `Successfully get month waters for ${date}`,
+    data: {
+      monthyWater: days
+    }
+  })
+}
 
 export const addWaterController = async (req, res, next) => {
   const { waterAmount, date } = req.body;
