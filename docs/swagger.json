@@ -131,15 +131,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "userId",
-            "schema": {
-              "type": "string",
-              "example": "65e4decdd286b30065d54af9"
-            },
-            "description": "The ID of the user to filter resources"
-          },
-          {
-            "in": "query",
             "name": "date",
             "schema": {
               "type": "string",
@@ -222,15 +213,6 @@
           }
         ],
         "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "schema": {
-              "type": "string",
-              "example": "65e4decdd286b30065d54af9"
-            },
-            "description": "The ID of the user to filter resources"
-          },
           {
             "in": "query",
             "name": "date",
