@@ -2,26 +2,27 @@
 
 tags:
   - Water
-summary: Get list of waters
+summary: Get list of waters for day
 operationId: getWatersForDay
 description: 'Get list of waters with this endpoint'
 security:
   - bearerAuth: []
 parameters:
   - in: query
-    name: date
-    schema:
-      type: string
-    example: 2024-08-03
-  - in: query
     name: userId
     schema:
       type: string
       example: 65e4decdd286b30065d54af9
     description: The ID of the user to filter resources
+  - in: query
+    name: date
+    schema:
+      type: string
+      example: 2024-08-03
+    description: The date of the added water to filter resources
 responses:
   '200':
-    description: Successfully found waters!
+    description: Successfully found waters for day
     content:
       application/json:
         schema:
@@ -40,16 +41,21 @@ responses:
             data:
               type: object
               required:
-                - date
-                - userId
+                - dailyProgress
+                - waters
               properties:
-                data:
+                dailyProgress:
+                  type: number
+                  example: 100
+                waters:
                   type: array
                   items:
-                    $ref: '../../components/schemas/contact.yaml'
-
-                hasPreviousPage:
-                  type: boolean
-                  example: true
+                    $ref: '../../components/schemas/water.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

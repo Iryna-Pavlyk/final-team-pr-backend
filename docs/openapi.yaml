@@ -15,7 +15,7 @@ tags:
     description: Auth operations
 servers:
   - url: http://localhost:3000
-  - url: https://nodejs-hw-mongodb-okzz #посилання на задеплоєний сайт
+  - url: https://final-team-pr-backend.onrender.com
 paths:
   /water:
     post:
@@ -24,12 +24,33 @@ paths:
     get:
       $ref: ../swagger/paths/water/getForDay.yaml
   /water/month:
-    $ref: ../swagger/paths/water/getForMonth.yaml
+    get:
+      $ref: ../swagger/paths/water/getForMonth.yaml
   /water/{waterId}:
     patch:
       $ref: ../swagger/paths/water/{id}/patch.yaml
     delete:
       $ref: ../swagger/paths/water/{id}/delete.yaml
+  /users:
+    get:
+      $ref: ../swagger/paths/users/get.yaml
+  /users/{userId}:
+    get:
+      $ref: ../swagger/paths/users/{id}/get.yaml
+    patch:
+      $ref: ../swagger/paths/users/{id}/patch.yaml
+  /auth/signup:
+    post:
+      $ref: '../swagger/paths/auth/signup/post.yaml'
+  /auth/signin:
+    post:
+      $ref: '../swagger/paths/auth/signin/post.yaml'
+  /auth/refresh:
+    post:
+      $ref: '../swagger/paths/auth/refresh/post.yaml'
+  /auth/logout:
+    post:
+      $ref: '../swagger/paths/auth/logout/post.yaml'
 components:
   securitySchemes:
     bearerAuth:

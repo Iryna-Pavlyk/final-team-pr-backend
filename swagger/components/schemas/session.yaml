@@ -1,0 +1,8 @@
+type: object
+required:
+  - accessToken
+properties:
+  accessToken:
+    description: "User's accessToken"
+    type: string
+    example: 'zBjaZKgFS/Md+br4xj9Mt2LK+1RfvpukB4iGo6zC'

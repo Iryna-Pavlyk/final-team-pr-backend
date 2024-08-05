@@ -1,0 +1,32 @@
+tags:
+  - Auth
+summary: Logout user
+operationId: logoutUser
+description: 'Logout a user with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: "User's email"
+            type: string
+            example: irina@mail.com
+          password:
+            description: "User's password"
+            type: string
+            example: 111111
+responses:
+  '204':
+    description: 'The user was logout successfully.'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

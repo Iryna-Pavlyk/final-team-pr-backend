@@ -30,7 +30,7 @@ requestBody:
             example: 2024-08-03T18:26
 responses:
   '200':
-    description: 'Update contact by id'
+    description: 'Update water by id'
     content:
       application/json:
         schema:
