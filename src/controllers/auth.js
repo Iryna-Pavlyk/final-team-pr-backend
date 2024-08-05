@@ -27,7 +27,7 @@ export const signupController = async (req, res) => {
   const { email } = req.body;
   const user = await findUser({ email });
   if (user) {
-    throw createHttpError(409, 'Email in use');
+    throw createHttpError(409, 'Email in use!');
   }
 
   const newUser = await signup(req.body);
