@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 import Session from '../db/models/Session.js';
-import { ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME } from '../constants/session-constants.js';
+import { ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME } from '../constants/session.js';
 
 export const findSession = (filter) => {
     return Session.findOne(filter);

@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { emailRegexp, userGender } from '../constants/user-constants.js';
+import { emailRegexp, userGender } from '../constants/user.js';
 
 export const userSignupSchema = Joi.object({
     email: Joi.string().pattern(emailRegexp).required(),
@@ -29,4 +29,5 @@ export const userInfoSchema = Joi.object({
     waterToDrink: Joi.number().integer().min(0).max(99000).messages({
         'string.base': 'Water to drink should be a number between 0 and 99000 L',
     }),
+    avatar: Joi.string,
 });

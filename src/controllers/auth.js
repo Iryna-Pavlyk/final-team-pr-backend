@@ -1,16 +1,13 @@
 import createHttpError from 'http-errors';
-import { signup, findUser } from '../services/auth-services.js';
+import { signup, findUser } from '../services/auth.js';
 import { compareHash } from '../utils/hash.js';
 import {
   createSession,
   deleteSession,
   findSession,
-} from '../services/session-services.js';
+} from '../services/session.js';
 
-const setupResponseSession = (
-  res,
-  { refreshToken, refreshTokenValidUntil, _id },
-) => {
+const setupResponseSession = (res, { refreshToken, refreshTokenValidUntil, _id }) => {
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     expires: refreshTokenValidUntil,

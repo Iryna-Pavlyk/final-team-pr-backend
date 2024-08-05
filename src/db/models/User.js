@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { mongooseSaveError, setUpdateSettings } from './hooks.js';
-import { emailRegexp, userGender } from '../../constants/user-constants.js';
+import { emailRegexp, userGender } from '../../constants/user.js';
 
 const userSchema = new Schema({
     name: {
@@ -37,6 +37,11 @@ const userSchema = new Schema({
     avatar: {
         type: String,
     },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+        required: true,
+    }
 }, {timestamps: true, versionKey: false});
 
 userSchema.post("save", mongooseSaveError);

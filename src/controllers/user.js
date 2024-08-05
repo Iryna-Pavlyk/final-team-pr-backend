@@ -1,5 +1,10 @@
 import createHttpError from "http-errors";
-import { getUsers, getUserSettings, patchUserSettings } from "../services/users-services.js";
+import { getUsers, getUserSettings, patchUserSettings } from "../services/users.js";
+import saveFileToPublicDir from "../utils/saveFileToPublicDir.js";
+import { saveFileToCloudinary } from "../utils/saveFileToCloudinary.js";
+import { env } from "../env.js";
+
+const enable_cloudinary = env('ENABLE_CLOUDINARY');
 
 export const getAllUsersController = async (req, res) => {
         const contacts = await getUsers();
@@ -25,10 +30,23 @@ export const getUserSettingsController = async (req, res) => {
         });
 };
 
-
 export const patchUserSettingsController = async (req, res) => {
     const userId = req.user._id;
-    const user = await patchUserSettings(userId, req.body);
+    let avatar = req.file;
+    let avatarUrl='';
+
+    if (avatar) {
+        if (enable_cloudinary === 'true') {
+            avatarUrl = await saveFileToCloudinary(avatar, 'aqautracker');
+        } else {
+            avatarUrl = await saveFileToPublicDir(avatar);
+        }
+    };
+
+    const user = await patchUserSettings(userId, {
+        ...req.body,
+        avatar:avatarUrl,
+    });
 
     if (!user) {
         throw createHttpError(404, 'User not found');
