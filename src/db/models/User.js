@@ -37,6 +37,11 @@ const userSchema = new Schema({
     avatar: {
         type: String,
     },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+        required: true,
+    }
 }, {timestamps: true, versionKey: false});
 
 userSchema.post("save", mongooseSaveError);

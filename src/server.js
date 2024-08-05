@@ -1,22 +1,23 @@
 import express from 'express';
-import pino from 'pino-http';
+// import pino from 'pino-http';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { env } from './env.js';
 import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { PUBLIC_DIR } from './constants/index.js';
 
 const PORT = Number(env('PORT', 3000));
 
 export const setupServer = () => {
   const app = express();
 
-  app.use(
-    pino({
-      transport: { target: 'pino-pretty' },
-    }),
-  );
+  // app.use(
+  //   pino({
+  //     transport: { target: 'pino-pretty' },
+  //   }),
+  // );
 
   app.use(
     cors({
@@ -26,6 +27,8 @@ export const setupServer = () => {
   );
 
   app.use(express.json());
+
+  app.use('/public', express.static(PUBLIC_DIR));
 
   app.use(cookieParser());
 
