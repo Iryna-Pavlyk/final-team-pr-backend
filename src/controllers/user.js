@@ -1,5 +1,5 @@
 import createHttpError from "http-errors";
-import { getUsers, getUserSettings, patchUserSettings } from "../services/users-services.js";
+import { getUsers, getUserSettings, patchUserSettings } from "../services/users.js";
 import saveFileToPublicDir from "../utils/saveFileToPublicDir.js";
 import { saveFileToCloudinary } from "../utils/saveFileToCloudinary.js";
 import { env } from "../env.js";

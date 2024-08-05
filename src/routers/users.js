@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import validateBody from '../utils/validateBody.js';
-import { userInfoSchema } from '../validation/user-schemas.js';
+import { userInfoSchema } from '../validation/user.js';
 import isValidId from '../middlewares/isValidId.js';
 import authenticate from '../middlewares/authenticate.js';
-import { getAllUsersController, getUserSettingsController, patchUserSettingsController } from '../controllers/user-controllers.js';
+import { getAllUsersController, getUserSettingsController, patchUserSettingsController } from '../controllers/user.js';
 import { upload } from '../middlewares/upload.js';
 
 const usersRouter = Router();
