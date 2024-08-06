@@ -65,6 +65,7 @@ export const signinController = async (req, res) => {
     message: 'Successfully logged in a user!',
     data: {
       accessToken: session.accessToken,
+      createdAt: session.createdAt
     },
   });
 };
@@ -92,6 +93,7 @@ export const refreshController = async (req, res) => {
     message: 'Successfully refreshed a session!',
     data: {
       accessToken: newSession.accessToken,
+      createdAt: newSession.createdAt
     },
   });
 };
