@@ -51,14 +51,19 @@ export const patchUserSettingsController = async (req, res) => {
     ...req.body,
     // avatar: avatarUrl,
   });
-
   if (!user) {
     throw createHttpError(404, 'User not found');
-  }
+    }
 
   res.status(200).json({
     status: res.statusCode,
     message: 'Settings were updated successfully!',
     data: user,
-  });
+ });
+
+
+
+
+
+
 };
