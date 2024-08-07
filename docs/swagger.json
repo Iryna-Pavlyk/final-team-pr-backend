@@ -11,10 +11,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://final-team-pr-backend.onrender.com"
     },
     {
-      "url": "https://final-team-pr-backend.onrender.com"
+      "url": "http://localhost:3000"
     }
   ],
   "tags": [
