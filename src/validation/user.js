@@ -19,7 +19,7 @@ export const userInfoSchema = Joi.object({
         'string.base': 'Name should be a string',
         'string.min': 'Name should have at least {3} characters',
         'string.max': 'Name should have at most {30} characters',}),
-    email: Joi.string().pattern(emailRegexp),
+    // email: Joi.string().pattern(emailRegexp),
     weight: Joi.number().min(0).max(300).messages({
         'string.base': 'Weight should be a number between 0 and 300 kg',
     }),
