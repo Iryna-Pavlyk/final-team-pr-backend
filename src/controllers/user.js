@@ -4,11 +4,11 @@ import {
   getUserSettings,
   patchUserSettings,
 } from '../services/users.js';
-// import saveFileToPublicDir from '../utils/saveFileToPublicDir.js';
-// import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
-// import { env } from '../env.js';
+import saveFileToPublicDir from '../utils/saveFileToPublicDir.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
+import { env } from '../env.js';
 
-// const enable_cloudinary = env('ENABLE_CLOUDINARY');
+const enable_cloudinary = env('ENABLE_CLOUDINARY');
 
 export const getAllUsersController = async (req, res) => {
   const contacts = await getUsers();
@@ -36,16 +36,16 @@ export const getUserSettingsController = async (req, res) => {
 
 export const patchUserSettingsController = async (req, res) => {
   const userId = req.user._id;
-  // let avatar = req.file;
-  // let avatarUrl = '';
+  let avatar = req.file;
+  let avatarUrl = '';
 
-  // if (avatar) {
-  //   if (enable_cloudinary === 'true') {
-  //     avatarUrl = await saveFileToCloudinary(avatar, 'aquatracker');
-  //   } else {
-  //     avatarUrl = await saveFileToPublicDir(avatar);
-  //   }
-  // }
+  if (avatar) {
+    if (enable_cloudinary === 'true') {
+      avatarUrl = await saveFileToCloudinary(avatar, 'aquatracker');
+    } else {
+      avatarUrl = await saveFileToPublicDir(avatar);
+    }
+  }
 
   const user = await patchUserSettings(userId, {
     ...req.body,
@@ -60,10 +60,4 @@ export const patchUserSettingsController = async (req, res) => {
     message: 'Settings were updated successfully!',
     data: user,
  });
-
-
-
-
-
-
 };

@@ -31,15 +31,12 @@ export const signupController = async (req, res) => {
   }
 
   const newUser = await signup(req.body);
-
-  const data = {
-    email: newUser.email,
-  };
+  const { password, ...filteredNewUser } = newUser.toObject();
 
   res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
-    data,
+    data: {userData: filteredNewUser},
   });
 };
 
