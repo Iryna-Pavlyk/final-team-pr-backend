@@ -6,6 +6,7 @@ import {
   deleteSession,
   findSession,
 } from '../services/session.js';
+import { getUserSettings } from '../services/users.js';
 
 const setupResponseSession = (res, { refreshToken, refreshTokenValidUntil, _id }) => {
   res.cookie('refreshToken', refreshToken, {
@@ -31,21 +32,19 @@ export const signupController = async (req, res) => {
   }
 
   const newUser = await signup(req.body);
-
-  const data = {
-    email: newUser.email,
-  };
+  const { password, createdAt, updatedAt, ...filteredNewUser } = newUser.toObject();
 
   res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
-    data,
+    data: {userData: filteredNewUser},
   });
 };
 
 export const signinController = async (req, res) => {
   const { email, password } = req.body;
   const user = await findUser({ email });
+  const userData = await getUserSettings({ _id: user._id });
 
   if (!user) {
     throw createHttpError(401, 'Email is invalid!');
@@ -57,7 +56,6 @@ export const signinController = async (req, res) => {
   }
 
   const session = await createSession(user._id);
-
   setupResponseSession(res, session);
 
   res.status(200).json({
@@ -65,8 +63,10 @@ export const signinController = async (req, res) => {
     message: 'Successfully logged in a user!',
     data: {
       accessToken: session.accessToken,
-      createdAt: session.createdAt
+      sessionCreatedAt: session.createdAt,
+      userData: userData
     },
+
   });
 };
 
@@ -93,7 +93,7 @@ export const refreshController = async (req, res) => {
     message: 'Successfully refreshed a session!',
     data: {
       accessToken: newSession.accessToken,
-      createdAt: newSession.createdAt
+      sessionCreatedAt: newSession.createdAt
     },
   });
 };

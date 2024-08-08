@@ -23,11 +23,11 @@ export const userInfoSchema = Joi.object({
     weight: Joi.number().min(0).max(300).messages({
         'string.base': 'Weight should be a number between 0 and 300 kg',
     }),
-    timeOfSportActivities: Joi.number().min(0).max(10).messages({
+    sportTime: Joi.number().min(0).max(10).messages({
         'string.base': 'Time of sport activities should be a number between 0 and 10 hours',
     }),
-    waterToDrink: Joi.number().integer().min(0).max(99000).messages({
+    waterRate: Joi.number().integer().min(0).max(99000).messages({
         'string.base': 'Water to drink should be a number between 0 and 99000 L',
     }),
-    avatar: Joi.string,
+    avatar: Joi.string(),
 });
