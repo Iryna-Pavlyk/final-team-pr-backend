@@ -26,11 +26,11 @@ const userSchema = new Schema({
         type: Number,
         default: 0,
     },
-    timeOfSportActivities: {
+    sportTime: {
         type: Number,
         default: 0,
     },
-    waterToDrink: {
+    waterRate: {
         type: Number,
         default: 1500,
     },
