@@ -14,8 +14,9 @@ export const getAllUsersController = async (req, res) => {
   const contacts = await getUsers();
   res.status(200).json({
     status: res.statusCode,
-    message: 'Successfully found users!',
-    data: contacts,
+    message: 'Successfully found total amount of users!',
+    data: {
+      totalUsers: contacts},
   });
 };
 
