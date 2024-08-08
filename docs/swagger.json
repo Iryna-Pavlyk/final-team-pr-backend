@@ -570,13 +570,13 @@
                     "example": 79,
                     "default": 0
                   },
-                  "timeOfSportActivities": {
+                  "sportTime": {
                     "description": "User's time of sport activities",
                     "type": "number",
                     "example": 2,
                     "default": 0
                   },
-                  "waterToDrink": {
+                  "waterRate": {
                     "description": "User's number of water to drink",
                     "type": "number",
                     "example": 1.5,
@@ -1014,13 +1014,13 @@
             "example": 79,
             "default": 0
           },
-          "timeOfSportActivities": {
+          "sportTime": {
             "description": "User's time of sport activities",
             "type": "number",
             "example": 2,
             "default": 0
           },
-          "waterToDrink": {
+          "waterRate": {
             "description": "User's number of water to drink",
             "type": "number",
             "example": 1.5,

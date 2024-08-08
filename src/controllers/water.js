@@ -8,10 +8,10 @@ import createHttpError from 'http-errors';
 
 export const getDayWaterController = async (req, res, next) => {
   const {date} = req.query
-
+  console.log(`user: ${req.user}`);
   const {waters, dailyProgress} = await getDayWater({
     date,
-    waterRate: req.user.waterToDrink,
+    waterRate: req.user.waterRate,
     userId: req.user._id
   })
 
@@ -20,7 +20,7 @@ export const getDayWaterController = async (req, res, next) => {
     message: `Successfully get waters for ${date}`,
     data: {
       dailyProgress,
-      waters
+      waters,
     }
   })
 }
@@ -30,7 +30,7 @@ export const getMonthWaterController = async (req, res, next) => {
 
   const data = await getMonthWater({
     date,
-    waterRate: req.user.waterToDrink,
+    waterRate: req.user.waterRate,
     userId: req.user._id})
 
   res.status(200).json({
