@@ -21,9 +21,9 @@ export const getAllUsersController = async (req, res) => {
 };
 
 export const getUserSettingsController = async (req, res) => {
-  const { _id: userId } = req.user;
-
-  const user = await getUserSettings({ _id: userId });
+  const userId = req.user._id;
+  const user = await getUserSettings(userId);
+  const { _id, updatedAt, ...filteredUser } = user;
 
   if (!user) {
     throw createHttpError(404, `User not found`);
@@ -31,7 +31,9 @@ export const getUserSettingsController = async (req, res) => {
   res.status(200).json({
     status: res.statusCode,
     message: `Successfully found user data!`,
-    data: {userData: user},
+    data: {
+      userData: filteredUser
+    },
   });
 };
 
@@ -50,8 +52,9 @@ export const patchUserSettingsController = async (req, res) => {
 
   const user = await patchUserSettings(userId, {
     ...req.body,
-    // avatar: avatarUrl,
+    avatar: avatarUrl,
   });
+
   if (!user) {
     throw createHttpError(404, 'User not found');
     }

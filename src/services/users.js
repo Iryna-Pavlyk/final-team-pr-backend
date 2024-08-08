@@ -16,7 +16,7 @@ export const patchUserSettings = async (userId, payload, options = {}) => {
     });
 
     if (!result || !result.value) return null;
-    const { password, ...filteredResultValue } = result.value.toObject();
+    const { password, _id, updatedAt, ...filteredResultValue } = result.value.toObject();
     const isNew = payload && payload.lastErrorObject && payload.lastErrorObject.upserted;
 
     return {
