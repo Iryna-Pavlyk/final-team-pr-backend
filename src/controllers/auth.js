@@ -45,7 +45,6 @@ export const signinController = async (req, res) => {
   const { email, password } = req.body;
   const user = await findUser({ email });
   const userData = await getUserSettings({ _id: user._id });
-  console.log(userData);
 
   if (!user) {
     throw createHttpError(401, 'Email is invalid!');
