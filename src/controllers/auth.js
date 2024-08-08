@@ -32,7 +32,7 @@ export const signupController = async (req, res) => {
   }
 
   const newUser = await signup(req.body);
-  const { password, createdAt, updatedAt, ...filteredNewUser } = newUser.toObject();
+  const { _id, password, updatedAt, ...filteredNewUser } = newUser.toObject();
 
   res.status(201).json({
     status: 201,
@@ -63,8 +63,16 @@ export const signinController = async (req, res) => {
     message: 'Successfully logged in a user!',
     data: {
       accessToken: session.accessToken,
-      sessionCreatedAt: session.createdAt,
-      userData: userData
+      userData: {
+        name: userData.name,
+        email: userData.email,
+        gender: userData.gender,
+        weight: userData.weight,
+        sportTime: userData.sportTime,
+        waterRate: userData.waterRate,
+        avatar: userData.avatar,
+        createdAt: userData.createdAt
+      }
     },
 
   });
@@ -72,7 +80,6 @@ export const signinController = async (req, res) => {
 
 export const refreshController = async (req, res) => {
   const { refreshToken, sessionId } = req.cookies;
-
   const currentSession = await findSession({ _id: sessionId, refreshToken });
 
   if (!currentSession) {
@@ -87,13 +94,23 @@ export const refreshController = async (req, res) => {
 
   const newSession = await createSession(currentSession.userId);
   setupResponseSession(res, newSession);
+  const userData = await getUserSettings({ _id: currentSession.userId });
 
   res.status(200).json({
     status: 200,
     message: 'Successfully refreshed a session!',
     data: {
       accessToken: newSession.accessToken,
-      sessionCreatedAt: newSession.createdAt
+       userData: {
+        name: userData.name,
+        email: userData.email,
+        gender: userData.gender,
+        weight: userData.weight,
+        sportTime: userData.sportTime,
+        waterRate: userData.waterRate,
+        avatar: userData.avatar,
+        createdAt: userData.createdAt
+      }
     },
   });
 };
