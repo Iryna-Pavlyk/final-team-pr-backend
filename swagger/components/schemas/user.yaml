@@ -1,8 +1,17 @@
 type: object
 required:
-  - email
+  - accessToken
+  - sessionCreatedAt
+  - userData
 properties:
-  email:
-    description: "Contact's email"
+  accessToken:
+    description: "User's accessToken"
     type: string
-    example: irina@mail.com
+    example: 'zBjaZKgFS/Md+br4xj9Mt2LK+1RfvpukB4iGo6zC'
+  sessionCreatedAt:
+    description: Session created at"
+    type: string
+    example: '2024-08-08T18:05:01.042Z'
+  userData:
+    type: object
+    $ref: '../../components/schemas/userById.yaml'

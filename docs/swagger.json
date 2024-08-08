@@ -454,7 +454,7 @@
         }
       }
     },
-    "/users/{userId}": {
+    "/users/current": {
       "get": {
         "tags": [
           "Users"
@@ -465,17 +465,6 @@
         "security": [
           {
             "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
-            }
           }
         ],
         "responses": {
@@ -526,17 +515,6 @@
         "security": [
           {
             "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
-            }
           }
         ],
         "requestBody": {
@@ -699,7 +677,12 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "properties": {
+                        "userData": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/userById"
+                        }
+                      }
                     }
                   }
                 }
@@ -783,7 +766,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/session"
+                      "$ref": "#/components/schemas/user"
                     }
                   }
                 }
@@ -994,11 +977,6 @@
             "type": "string",
             "example": "irina@mail.com"
           },
-          "password": {
-            "description": "User's password",
-            "type": "string",
-            "example": "$2b$10$r/nQxWw/b1nfjWVJKjJGJeNg6bTPD5j5bAWruu.MyZCLr8kver8wW"
-          },
           "gender": {
             "description": "User's gender",
             "type": "string",
@@ -1036,26 +1014,43 @@
       "user": {
         "type": "object",
         "required": [
-          "email"
-        ],
-        "properties": {
-          "email": {
-            "description": "Contact's email",
-            "type": "string",
-            "example": "irina@mail.com"
-          }
-        }
-      },
-      "session": {
-        "type": "object",
-        "required": [
-          "accessToken"
+          "accessToken",
+          "sessionCreatedAt",
+          "userData"
         ],
         "properties": {
           "accessToken": {
             "description": "User's accessToken",
             "type": "string",
             "example": "zBjaZKgFS/Md+br4xj9Mt2LK+1RfvpukB4iGo6zC"
+          },
+          "sessionCreatedAt": {
+            "description": "Session created at\"",
+            "type": "string",
+            "example": "2024-08-08T18:05:01.042Z"
+          },
+          "userData": {
+            "type": "object",
+            "$ref": "#/components/schemas/userById"
+          }
+        }
+      },
+      "session": {
+        "type": "object",
+        "required": [
+          "accessToken",
+          "sessionCreatedAt"
+        ],
+        "properties": {
+          "accessToken": {
+            "description": "User's accessToken",
+            "type": "string",
+            "example": "zBjaZKgFS/Md+br4xj9Mt2LK+1RfvpukB4iGo6zC"
+          },
+          "sessionCreatedAt": {
+            "description": "Session created at\"",
+            "type": "string",
+            "example": "2024-08-08T18:05:01.042Z"
           }
         }
       }

@@ -17,10 +17,6 @@ properties:
     description: "Contact's email"
     type: string
     example: irina@mail.com
-  password:
-    description: "User's password"
-    type: string
-    example: '$2b$10$r/nQxWw/b1nfjWVJKjJGJeNg6bTPD5j5bAWruu.MyZCLr8kver8wW'
   gender:
     description: "User's gender"
     type: string
