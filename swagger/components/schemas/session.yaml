@@ -1,8 +1,13 @@
 type: object
 required:
   - accessToken
+  - sessionCreatedAt
 properties:
   accessToken:
     description: "User's accessToken"
     type: string
     example: 'zBjaZKgFS/Md+br4xj9Mt2LK+1RfvpukB4iGo6zC'
+  sessionCreatedAt:
+    description: Session created at"
+    type: string
+    example: '2024-08-08T18:05:01.042Z'

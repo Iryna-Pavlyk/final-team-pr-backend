@@ -34,7 +34,7 @@ paths:
   /users:
     get:
       $ref: ../swagger/paths/users/get.yaml
-  /users/{userId}:
+  /users/current:
     get:
       $ref: ../swagger/paths/users/{id}/get.yaml
     patch:
