@@ -108,9 +108,6 @@
           },
           "404": {
             "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -192,9 +189,6 @@
           },
           "404": {
             "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -276,9 +270,6 @@
           },
           "404": {
             "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -366,9 +357,6 @@
           },
           "404": {
             "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       },
@@ -459,9 +447,9 @@
         "tags": [
           "Users"
         ],
-        "summary": "Get user by id",
-        "operationId": "getUserById",
-        "description": "Get user by id",
+        "summary": "Get current user",
+        "operationId": "getCurrentUser",
+        "description": "Get current user",
         "security": [
           {
             "bearerAuth": []
@@ -469,7 +457,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully found user with id",
+            "description": "Successfully found user current user",
             "content": {
               "application/json": {
                 "schema": {
@@ -486,7 +474,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully found user with id 65e4decdd286b30065d54af9!"
+                      "example": "Successfully found user data!"
                     },
                     "data": {
                       "type": "object",
@@ -509,9 +497,9 @@
         "tags": [
           "Users"
         ],
-        "summary": "Update user by id",
-        "operationId": "patchUser",
-        "description": "Update user by id",
+        "summary": "Update current user",
+        "operationId": "patchCurrentUser",
+        "description": "Update current user",
         "security": [
           {
             "bearerAuth": []
@@ -608,9 +596,6 @@
           },
           "404": {
             "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -697,9 +682,6 @@
           },
           "409": {
             "$ref": "#/components/responses/409"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -778,9 +760,6 @@
           },
           "404": {
             "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -856,9 +835,6 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -908,9 +884,6 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -1183,43 +1156,6 @@
                     "message": {
                       "type": "string",
                       "example": "Email in use"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "500": {
-        "description": "Something went wrong",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 500
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Something went wrong"
                     }
                   }
                 }
