@@ -41,10 +41,14 @@ export const patchUserSettingsController = async (req, res) => {
   const userId = req.user._id;
   let avatar = req.file;
   let avatarUrl = '';
+  const reqBody = {
+    ...req.body
+  };
 
   if (avatar) {
     if (enable_cloudinary === 'true') {
       avatarUrl = await saveFileToCloudinary(avatar, 'aquatracker');
+      reqBody.avatar = avatarUrl;
     } else {
       avatarUrl = await saveFileToPublicDir(avatar);
     }
