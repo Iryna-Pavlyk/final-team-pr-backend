@@ -44,12 +44,11 @@ export const signupController = async (req, res) => {
 export const signinController = async (req, res) => {
   const { email, password } = req.body;
   const user = await findUser({ email });
-  const userData = await getUserSettings({ _id: user._id });
 
   if (!user) {
     throw createHttpError(401, 'Email is invalid!');
   }
-
+  const userData = await getUserSettings({ _id: user._id });
   const passwordCompare = await compareHash(password, user.password);
   if (!passwordCompare) {
     throw createHttpError(401, 'Password is invalid!');
