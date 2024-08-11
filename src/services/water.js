@@ -1,5 +1,6 @@
 import { WaterCollection } from '../db/models/water.js';
 import { calculateWaterProgress } from '../utils/calculateWaterProgress.js';
+import createHttpError from 'http-errors';
 
 export const getDayWater = async ({date, waterRate, userId}) => {
   const startDate = `${date}T00:00`;
@@ -83,7 +84,7 @@ export const updateWater = async ({
   payload,
   options = {},
 }) => {
-  const rawResult = await WaterCollection.findOneAndUpdate(
+  const water = await WaterCollection.findOneAndUpdate(
     { _id: waterId, userId },
     payload,
     {
@@ -93,10 +94,5 @@ export const updateWater = async ({
     },
   );
 
-  if (!rawResult || !rawResult.value) return null;
-
-  return {
-    water: rawResult.value,
-    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
-  };
+  return water.value
 };
