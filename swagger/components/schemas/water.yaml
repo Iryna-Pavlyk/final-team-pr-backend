@@ -1,5 +1,3 @@
-# swagger/components/schemas/student.yaml
-
 type: object
 required:
   - _id

@@ -1,6 +1,16 @@
 # swagger/components/schemas/userById.yaml
 
 type: object
+required:
+  - _id
+  - name
+  - email
+  - gender
+  - weight
+  - sportTime
+  - waterRate
+  - avatar
+  - createdAt
 properties:
   _id:
     description: "User's id"
