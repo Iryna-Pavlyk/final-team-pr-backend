@@ -43,6 +43,16 @@ responses:
               example: Successfully refreshed a session!
             data:
               type: object
-              $ref: '../../../components/schemas/session.yaml'
+              required:
+                - accessToken
+                - userData
+              properties:
+                accessToken:
+                  description: "User's accessToken"
+                  type: string
+                  example: 'zBjaZKgFS/Md+br4xj9Mt2LK+1RfvpukB4iGo6zC'
+                userData:
+                  type: object
+                  $ref: '../../../components/schemas/userById.yaml'
   '401':
     $ref: '../../../components/responses/401.yaml'

@@ -907,7 +907,21 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/session"
+                      "required": [
+                        "accessToken",
+                        "userData"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "description": "User's accessToken",
+                          "type": "string",
+                          "example": "zBjaZKgFS/Md+br4xj9Mt2LK+1RfvpukB4iGo6zC"
+                        },
+                        "userData": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/userById"
+                        }
+                      }
                     }
                   }
                 }
@@ -1033,10 +1047,6 @@
       },
       "userById": {
         "type": "object",
-        "required": [
-          "email",
-          "password"
-        ],
         "properties": {
           "_id": {
             "description": "User's id",
@@ -1084,6 +1094,10 @@
             "description": "Link to user's photo",
             "type": "string",
             "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-08-03T15:10:36.826Z"
           }
         }
       },
@@ -1108,25 +1122,6 @@
           "userData": {
             "type": "object",
             "$ref": "#/components/schemas/userById"
-          }
-        }
-      },
-      "session": {
-        "type": "object",
-        "required": [
-          "accessToken",
-          "sessionCreatedAt"
-        ],
-        "properties": {
-          "accessToken": {
-            "description": "User's accessToken",
-            "type": "string",
-            "example": "zBjaZKgFS/Md+br4xj9Mt2LK+1RfvpukB4iGo6zC"
-          },
-          "sessionCreatedAt": {
-            "description": "Session created at\"",
-            "type": "string",
-            "example": "2024-08-08T18:05:01.042Z"
           }
         }
       }

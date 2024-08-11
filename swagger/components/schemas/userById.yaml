@@ -1,9 +1,6 @@
 # swagger/components/schemas/userById.yaml
 
 type: object
-required:
-  - email
-  - password
 properties:
   _id:
     description: "User's id"
@@ -41,3 +38,6 @@ properties:
     description: "Link to user's photo"
     type: string
     example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+  createdAt:
+    type: string
+    example: '2024-08-03T15:10:36.826Z'
