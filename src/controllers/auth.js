@@ -46,7 +46,7 @@ export const signinController = async (req, res) => {
   const user = await findUser({ email });
 
   if (!user) {
-    throw createHttpError(401, 'Email is invalid!');
+    throw createHttpError(401, 'Email not found!');
   }
   const userData = await getUserSettings({ _id: user._id });
   const passwordCompare = await compareHash(password, user.password);
