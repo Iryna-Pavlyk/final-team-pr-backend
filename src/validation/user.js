@@ -2,15 +2,19 @@ import Joi from 'joi';
 import { emailRegexp, userGender } from '../constants/user.js';
 
 export const userSignupSchema = Joi.object({
-    email: Joi.string().pattern(emailRegexp).required(),
+    email: Joi.string().pattern(emailRegexp).required().messages({
+        'string.pattern.base': 'Email format should be like "example123@mail.com".'
+  }),
     password: Joi.string().min(6).required().messages({
-    'string.min': 'Password should have at least {6} characters'}),
+        'string.min': 'Password should have at least {6} characters'}),
 });
 
 export const userSigninSchema = Joi.object({
-    email: Joi.string().pattern(emailRegexp).required(),
+    email: Joi.string().pattern(emailRegexp).required().messages({
+        'string.pattern.base': 'Email format should be like "example123@mail.com".'
+  }),
     password: Joi.string().min(6).required().messages({
-    'string.min': 'Password should have at least {6} characters'}),
+        'string.min': 'Password should have at least {6} characters'}),
 });
 
 export const userInfoSchema = Joi.object({
@@ -19,7 +23,6 @@ export const userInfoSchema = Joi.object({
         'string.base': 'Name should be a string',
         'string.min': 'Name should have at least {3} characters',
         'string.max': 'Name should have at most {30} characters',}),
-    // email: Joi.string().pattern(emailRegexp),
     weight: Joi.number().min(0).max(300).messages({
         'string.base': 'Weight should be a number between 0 and 300 kg',
     }),

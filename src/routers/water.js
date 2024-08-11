@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { validateBody } from '../middlewares/validateBody.js';
 import {
   addWaterController,
   deleteWaterController,
@@ -15,7 +14,8 @@ import {
   updateWaterSchema,
 } from '../validation/water.js';
 import authenticate from '../middlewares/authenticate.js';
-import validateQuery from '../utils/validateQuery.js';
+import validateBody from '../middlewares/validateBody.js';
+import validateQuery from '../middlewares/validateQuery.js';
 
 const router = Router();
 
