@@ -160,10 +160,15 @@
                     "data": {
                       "type": "object",
                       "required": [
+                        "date",
                         "dailyProgress",
                         "waters"
                       ],
                       "properties": {
+                        "date": {
+                          "type": "string",
+                          "example": "2024-08-03"
+                        },
                         "dailyProgress": {
                           "type": "number",
                           "example": 100
@@ -236,23 +241,24 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully get waters for 2024-08"
+                      "example": "Successfully get month waters for 2024-08"
                     },
                     "data": {
                       "type": "object",
                       "required": [
-                        "dailyProgress",
-                        "waters"
+                        "date",
+                        "monthlyWater"
                       ],
                       "properties": {
-                        "dailyProgress": {
-                          "type": "number",
-                          "example": 100
+                        "date": {
+                          "type": "string",
+                          "example": "2024-08"
                         },
-                        "waters": {
+                        "monthlyWater": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/water"
+                            "type": "object",
+                            "$ref": "#/components/schemas/waterForMonth"
                           }
                         }
                       }
@@ -338,11 +344,29 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully patched a water!"
+                      "example": "Successfully update a water!"
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/water"
+                      "required": [
+                        "date",
+                        "updatedDailyProgress",
+                        "water"
+                      ],
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "example": "2024-08-03"
+                        },
+                        "updatedDailyProgress": {
+                          "type": "number",
+                          "example": 50
+                        },
+                        "water": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/water"
+                        }
+                      }
                     }
                   }
                 }
@@ -384,8 +408,52 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The resource was deleted successfully."
+          "200": {
+            "description": "Successfully deleted water!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully update a water!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "date",
+                        "updatedDailyProgress",
+                        "water"
+                      ],
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "example": "2024-08-03"
+                        },
+                        "updatedDailyProgress": {
+                          "type": "number",
+                          "example": 50
+                        },
+                        "water": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/water"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/404"
@@ -900,12 +968,17 @@
       "water": {
         "type": "object",
         "required": [
+          "_id",
           "waterAmount",
           "date",
-          "userId",
-          "_id"
+          "userId"
         ],
         "properties": {
+          "_id": {
+            "description": "Water's id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
           "waterAmount": {
             "description": "Water amount",
             "type": "number",
@@ -920,11 +993,27 @@
             "description": "User's id",
             "type": "string",
             "example": "65e4decdd286b30065d54af9"
-          },
-          "_id": {
-            "description": "Water's id",
+          }
+        }
+      },
+      "waterForMonth": {
+        "type": "object",
+        "required": [
+          "date",
+          "dailyProgress"
+        ],
+        "properties": {
+          "date": {
             "type": "string",
-            "example": "65e4decdd286b30065d54af9"
+            "example": "2024-08-02"
+          },
+          "dailyProgress": {
+            "type": "number",
+            "example": 10
+          },
+          "sumWaterAmount": {
+            "type": "number",
+            "example": 5000
           }
         }
       },

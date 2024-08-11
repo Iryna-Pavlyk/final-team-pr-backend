@@ -1,0 +1,14 @@
+type: object
+required:
+  - date
+  - dailyProgress
+properties:
+  date:
+    type: string
+    example: '2024-08-02'
+  dailyProgress:
+    type: number
+    example: 10
+  sumWaterAmount:
+    type: number
+    example: 5000

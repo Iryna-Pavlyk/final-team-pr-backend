@@ -2,11 +2,15 @@
 
 type: object
 required:
+  - _id
   - waterAmount
   - date
   - userId
-  - _id
 properties:
+  _id:
+    description: "Water's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
   waterAmount:
     description: 'Water amount'
     type: number
@@ -17,9 +21,5 @@ properties:
     example: 2024-08-03T18:26
   userId:
     description: "User's id"
-    type: string
-    example: 65e4decdd286b30065d54af9
-  _id:
-    description: "Water's id"
     type: string
     example: 65e4decdd286b30065d54af9

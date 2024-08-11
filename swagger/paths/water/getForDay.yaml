@@ -35,9 +35,13 @@ responses:
             data:
               type: object
               required:
+                - date
                 - dailyProgress
                 - waters
               properties:
+                date:
+                  type: string
+                  example: '2024-08-03'
                 dailyProgress:
                   type: number
                   example: 100
