@@ -18,6 +18,7 @@ export const getDayWaterController = async (req, res, next) => {
     status: 200,
     message: `Successfully get waters for ${date}`,
     data: {
+      date,
       dailyProgress,
       waters,
     }
@@ -36,6 +37,7 @@ export const getMonthWaterController = async (req, res, next) => {
     status: 200,
     message: `Successfully get month waters for ${date}`,
     data: {
+      date,
       monthlyWater: data
     }
   })
@@ -65,6 +67,7 @@ export const addWaterController = async (req, res, next) => {
     status: 201,
     message: `Successfully created a water!`,
     data: {
+      date: date.slice(0, date.indexOf('T')),
       updatedDailyProgress: dailyProgress,
       water
     },
@@ -82,8 +85,10 @@ export const deleteWaterController = async (req, res, next) => {
     return;
   }
 
+  const date = water.date.slice(0, water.date.indexOf('T'))
+
   const {dailyProgress} = await getDayWater({
-    date: water.date.slice(0, water.date.indexOf('T')),
+    date,
     waterRate: req.user.waterRate,
     userId: req.user._id
   })
@@ -92,6 +97,7 @@ export const deleteWaterController = async (req, res, next) => {
     status: 200,
     message: `Successfully deleted water!`,
     data: {
+      date,
       updatedDailyProgress: dailyProgress,
       water
     }
@@ -113,8 +119,10 @@ export const patchWaterController = async (req, res, next) => {
     return;
   }
 
+  const date = water.date.slice(0, water.date.indexOf('T'))
+
   const {dailyProgress} = await getDayWater({
-    date: water.date.slice(0, water.date.indexOf('T')),
+    date,
     waterRate: req.user.waterRate,
     userId: req.user._id
   })
@@ -123,6 +131,7 @@ export const patchWaterController = async (req, res, next) => {
     status: 200,
     message: 'Successfully update a water!',
     data: {
+      date,
       updatedDailyProgress: dailyProgress,
       water
     }
